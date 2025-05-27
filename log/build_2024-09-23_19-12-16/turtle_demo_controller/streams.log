@@ -1,0 +1,18 @@
+[0.434s] Invoking command in '/home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller': PYTHONPATH=/home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sangwon/ROS2_turtlesim_PID_demo/install/turtle_demo_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller/build --no-deps symlink_data
+[0.565s] running develop
+[0.629s] running egg_info
+[0.629s] writing turtle_demo_controller.egg-info/PKG-INFO
+[0.629s] writing dependency_links to turtle_demo_controller.egg-info/dependency_links.txt
+[0.629s] writing entry points to turtle_demo_controller.egg-info/entry_points.txt
+[0.629s] writing requirements to turtle_demo_controller.egg-info/requires.txt
+[0.629s] writing top-level names to turtle_demo_controller.egg-info/top_level.txt
+[0.646s] reading manifest file 'turtle_demo_controller.egg-info/SOURCES.txt'
+[0.647s] writing manifest file 'turtle_demo_controller.egg-info/SOURCES.txt'
+[0.666s] running build_ext
+[0.666s] Creating /home/sangwon/ROS2_turtlesim_PID_demo/install/turtle_demo_controller/lib/python3.8/site-packages/turtle-demo-controller.egg-link (link to .)
+[0.666s] Installing leader_follower script to /home/sangwon/ROS2_turtlesim_PID_demo/install/turtle_demo_controller/lib/turtle_demo_controller
+[0.666s] Installing turt_controller script to /home/sangwon/ROS2_turtlesim_PID_demo/install/turtle_demo_controller/lib/turtle_demo_controller
+[0.667s] 
+[0.667s] Installed /home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller
+[0.667s] running symlink_data
+[0.683s] Invoked command in '/home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller' returned '0': PYTHONPATH=/home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/sangwon/ROS2_turtlesim_PID_demo/install/turtle_demo_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /home/sangwon/ROS2_turtlesim_PID_demo/build/turtle_demo_controller/build --no-deps symlink_data

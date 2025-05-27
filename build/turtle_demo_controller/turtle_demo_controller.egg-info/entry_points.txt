@@ -1,0 +1,4 @@
+[console_scripts]
+leader_follower = turtle_demo_controller.leader_follower:main
+turt_controller = turtle_demo_controller.turtle_controller:main
+

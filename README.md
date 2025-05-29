@@ -17,7 +17,7 @@ https://shortcuts.tistory.com/8
 ```
 $ mkdir my_ws/src  
 $ cd ~/my_ws/src  
-$ git clone https://github.com/lsw23101/ros2_turtlebot_leader_follower
+$ git clone https://github.com/lsw23101/ROS2_turtlesim_ws
 
 colcon build --symlink-install
 ```

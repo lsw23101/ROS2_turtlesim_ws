@@ -10,7 +10,7 @@
    - look up table의 방식 cordic 이 흥미로워 보이고 혹시 설명을 한번 해주실수 있는지 (중간에 부호를 판별해야하는 부분이 존재...)
 
 
-# git pull, push 하는법,,,
+# git 다루기
 https://shortcuts.tistory.com/8
 
 # install

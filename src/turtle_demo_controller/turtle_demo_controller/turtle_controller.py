@@ -5,78 +5,88 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 
-class Controller_Node(Node):
+class TurtleController(Node):
     def __init__(self):
-        super().__init__('turt_controller')
-        self.get_logger().info("Node Started")
+        super().__init__('turtle_controller')
+        self.get_logger().info("Turtle Controller Node Started")
         
-
-        # 초기 터틀봇 위치: (5.5, 5.5)
-
-        self.desired_x = 1.0  # Adjust as needed
-        self.desired_y = 9.0  # Adjust as needed
-
-        # Publisher and Subscriber        
-        self.my_pose_sub = self.create_subscription(Pose, "/turtle1/pose", self.pose_callback, 10)
-        self.my_vel_command = self.create_publisher(Twist, "/turtle1/cmd_vel", 10)
-
-    def pose_callback(self, msg: Pose):
-        self.get_logger().info(f"Current x={msg.x} current y={msg.y} and current angle = {msg.theta}")
-        # Calculate errors in position
-        err_x = self.desired_x - msg.x
-        err_y = self.desired_y - msg.y 
-        err_dist = (err_x**2+err_y**2)**0.5
+        # 위치 저장 변수
+        self.target_x = 5.0
+        self.target_y = 5.0
         
-        # Distance error (magnitude of the error vector)
+        # 상태 정보 구독
+        self.turtle1_state_sub = self.create_subscription(
+            Pose,
+            "/turtle1/state",
+            self.target_pose_callback,
+            10
+        )
+        self.turtle2_state_sub = self.create_subscription(
+            Pose,
+            "/turtle2/state",
+            self.current_pose_callback,
+            10
+        )
         
-        self.get_logger().info(f"Error in x {err_x} and error in y {err_y}")
+        # 제어 명령 발행
+        self.control_command_pub = self.create_publisher(
+            Twist,
+            "/turtle2/control_command",
+            10
+        )
 
-        # Desired heading based on the position error
+    def target_pose_callback(self, msg: Pose):
+        """목표(터틀1)의 위치 업데이트"""
+        self.target_x = msg.x
+        self.target_y = msg.y
+        self.get_logger().debug(f"Updated target position: x={msg.x:.2f}, y={msg.y:.2f}")
+
+    def current_pose_callback(self, msg: Pose):
+        """현재(터틀2) 위치를 받아 제어 명령 계산 및 발행"""
+        # 위치 오차 계산
+        err_x = self.target_x - msg.x
+        err_y = self.target_y - msg.y
+        err_dist = math.sqrt(err_x**2 + err_y**2)
+        
+        # 목표 방향 계산
         desired_theta = math.atan2(err_y, err_x)
-        
-        # Error in heading
         err_theta = desired_theta - msg.theta
-       
-        # Handle wrap-around issues (e.g., if error jumps from +pi to -pi) # 각도의 범위를 +-파이로 조정
+        
+        # 각도 정규화 (-π ~ π)
         while err_theta > math.pi:
             err_theta -= 2.0 * math.pi
         while err_theta < -math.pi:
             err_theta += 2.0 * math.pi
-        
-        self.get_logger().info(f"Desired Angle = {desired_theta} current angle {msg.theta} Error angle {err_theta}")
-        # P (ID not required) for linear velocity (distance control)
-
-        Kp_dist = 0.9
             
-        # P (ID not required) constants for angular velocity (heading control)
-        Kp_theta = 2
+        # 제어 게인
+        Kp_dist = 0.9
+        Kp_theta = 2.0
         
-
-        # TODO: Add integral and derivative calculations for complete PID
-
-        # PID control for linear velocity
-        #l_v = Kp_dist * abs(err_x) # + Ki_dist * integral_dist + Kd_dist * derivative_dist
-        l_v = Kp_dist * abs(err_dist) # + Ki_dist * integral_dist + Kd_dist * derivative_dist
-
-        # PID control for angular velocity
-        a_v = Kp_theta * err_theta  
-
-        # Send the velocities
-        self.my_velocity_cont(l_v, a_v)
-
-    def my_velocity_cont(self, l_v, a_v):
-        self.get_logger().info(f"Commanding liner ={l_v} and angular ={a_v}")
-        my_msg = Twist()
-        my_msg.linear.x = l_v
-        my_msg.angular.z = a_v
-        self.my_vel_command.publish(my_msg)
+        # 제어 명령 계산
+        if err_dist < 0.1:  # 더 작은 임계값으로 수정
+            linear_vel = 0.0
+            angular_vel = 0.0
+        else:
+            linear_vel = Kp_dist * err_dist
+            angular_vel = Kp_theta * err_theta
+        
+        # 제어 명령 발행
+        self.publish_control_command(linear_vel, angular_vel)
+        
+    def publish_control_command(self, linear_vel, angular_vel):
+        """계산된 제어 명령을 발행"""
+        cmd = Twist()
+        cmd.linear.x = linear_vel
+        cmd.angular.z = angular_vel
+        self.control_command_pub.publish(cmd)
+        self.get_logger().debug(f"Published control command: linear={linear_vel:.2f}, angular={angular_vel:.2f}")
 
 def main(args=None):
     rclpy.init(args=args)
-    pid_control = Controller_Node()
-    rclpy.spin(pid_control)
-    pid_control.destroy_node()
+    controller = TurtleController()
+    rclpy.spin(controller)
+    controller.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':
-    main()
+    main() 

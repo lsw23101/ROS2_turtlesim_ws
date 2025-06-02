@@ -4,29 +4,46 @@ from launch.actions import ExecuteProcess
 
 def generate_launch_description():
     return LaunchDescription([
-        # 첫 번째 터틀심 노드를 실행
+        # 1. 터틀심 노드 실행
         Node(
             package='turtlesim',
             executable='turtlesim_node',
-            name='turtlesim1',
+            name='turtlesim',
             output='screen'
         ),
-        # 두 번째 터틀봇 생성
+        
+        # 2. 두 번째 터틀 생성 (터틀2)
         ExecuteProcess(
             cmd=['ros2', 'service', 'call', '/spawn', 'turtlesim/srv/Spawn', 
-                 '{"x": 2.0, "y": 2.0, "theta": 0.0, "name": "turtle2"}'],
+                 '{x: 2.0, y: 2.0, theta: 0.0, name: "turtle2"}'],
             output='screen'
         ),
-        # 첫 번째 터틀의 색깔 변경
-        ExecuteProcess(
-            cmd=['ros2', 'service', 'call', '/turtle1/set_pen', 'turtlesim/srv/SetPen', 
-                 '{"r": 255, "g": 0, "b": 0, "width": 2, "off": 0}'],  # 빨간색
+        
+        # 3. 플랜트 노드 실행
+        Node(
+            package='turtle_demo_controller',
+            executable='turtle_plant.py',
+            name='turtle_plant',
             output='screen'
         ),
-        # 두 번째 터틀의 색깔 변경
-        ExecuteProcess(
-            cmd=['ros2', 'service', 'call', '/turtle2/set_pen', 'turtlesim/srv/SetPen', 
-                 '{"r": 0, "g": 0, "b": 255, "width": 2, "off": 0}'],  # 파란색
+        
+        # 4. 컨트롤러 노드 실행
+        Node(
+            package='turtle_demo_controller',
+            executable='turtle_controller.py',
+            name='turtle_controller',
             output='screen'
         ),
-    ])
+        
+        # 5. 터틀1 제어를 위한 키보드 텔레옵 노드
+        Node(
+            package='teleop_twist_keyboard',
+            executable='teleop_twist_keyboard',
+            name='teleop',
+            prefix='xterm -e',
+            remappings=[
+                ('/cmd_vel', '/turtle1/cmd_vel'),
+            ],
+            output='screen'
+        )
+    ]) 

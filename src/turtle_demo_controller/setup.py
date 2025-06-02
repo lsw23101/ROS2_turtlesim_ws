@@ -10,7 +10,10 @@ setup(
         ('share/ament_index/resource_index/packages',
          ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/two_turtle.launch.py']),
+        ('share/' + package_name + '/launch', [
+            'launch/two_turtle.launch.py',
+            'launch/enc_two_turtle.launch.py'
+        ]),
     ],
     install_requires=['setuptools'],
     zip_safe=False,
@@ -20,8 +23,10 @@ setup(
     license='TODO: License declaration',
     entry_points={
         'console_scripts': [
-            'turt_controller = turtle_demo_controller.turtle_controller:main',
-            'leader_follower = turtle_demo_controller.leader_follower:main'
+            'turtle_plant = turtle_demo_controller.turtle_plant:main',
+            'turtle_controller = turtle_demo_controller.turtle_controller:main',
+            'enc_turtle_plant = turtle_demo_controller.enc_turtle_plant:main',
+            'enc_turtle_controller = turtle_demo_controller.enc_turtle_controller:main',
         ],
     },
 )

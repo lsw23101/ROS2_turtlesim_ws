@@ -50,36 +50,23 @@ turtlesim package
 1. 배쉬 실행
 ```
 source /opt/ros/foxy/setup.bash
-
 source install/setup.bash
 
+OR 단축어 설정 해놨으면
 
-rosfoxy / source ./install/setup.bash
-```
-
-2. 터틀봇 두개 소환하는 런치 파일 실행  
-```
-ros2 launch turtle_demo_controller two_turtle.launch.py
+rosfoxy 
 ```
 
-3. 터틀봇1을 움직일 노드파일 실행
-new terminal:  
+2. 런치파일 실행
+   
 ```
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap /cmd_vel:=/turtle1/cmd_vel
-```
-
-5. leader-follower 노드 실행
-new terminal:  
-```
-ros2 run turtle_demo_controller leader_follower
+ros2 launch enc_turtle_cpp enc_turtle_demo.launch.py
 ```
 
 # ToDo
-- publisher subcriber 나눠서 plant contoller 파트 나누기
-- 암호 적용하기
-- 
-
 
 # Reference
+
+
 
 https://github.com/roboticvedant/ROS2_turtlesim_PID_demo

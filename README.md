@@ -1,5 +1,8 @@
 # turtlebot_encrypted_control
 
+OpenFHE 파이썬은 동형암호 스킴이 지원이 안되는 것으로 보임...
+
+
 # 질문거리
 
 1. 시나리오 설정을 어떻게 해야 좋을지

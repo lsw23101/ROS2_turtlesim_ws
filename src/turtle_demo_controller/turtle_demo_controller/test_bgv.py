@@ -10,12 +10,22 @@ def test_bgv():
     
     try:
         # BGV 파라미터 설정
-        cc = CryptoContext()
-        cc.GenerateBGVContext(8192, 65537, 1)
+        params = CCParams()
+        params.SetScheme(SCHEME.BGV)
+        params.SetRingDim(1 << 12)
+        params.SetPlaintextModulus(65537)
+        params.SetScalingModSize(50)
+        params.SetBatchSize(8)
+        
+        # 암호화 컨텍스트 생성
+        cc = GenCryptoContext(params)
+        cc.Enable(PKESchemeFeature.PKE)
+        cc.Enable(PKESchemeFeature.KEYSWITCH)
+        cc.Enable(PKESchemeFeature.LEVELEDSHE)
         print("\n1. BGV 컨텍스트 생성 완료")
         
         # 키 생성
-        sk = cc.KeyGen()
+        keys = cc.KeyGen()
         print("2. 키 생성 완료")
         
         # 테스트할 값들
@@ -24,25 +34,31 @@ def test_bgv():
         
         for value in test_values:
             # 정수를 암호화
-            ct = cc.Encrypt(sk, value)
+            plaintext = cc.MakePackedPlaintext([value])
+            ciphertext = cc.Encrypt(keys.publicKey, plaintext)
             
             # 복호화
-            decrypted = cc.Decrypt(sk, ct)
+            decrypted_text = cc.Decrypt(keys.secretKey, ciphertext)
+            decrypted_value = decrypted_text.GetPackedValue()[0]
             
-            print(f"  입력: {value}, 출력: {decrypted}")
+            print(f"  입력: {value}, 출력: {decrypted_value}")
             
         # 덧셈 테스트
         print("\n4. 덧셈 테스트:")
         value1, value2 = 42, 24
         
-        ct1 = cc.Encrypt(sk, value1)
-        ct2 = cc.Encrypt(sk, value2)
+        pt1 = cc.MakePackedPlaintext([value1])
+        pt2 = cc.MakePackedPlaintext([value2])
+        
+        ct1 = cc.Encrypt(keys.publicKey, pt1)
+        ct2 = cc.Encrypt(keys.publicKey, pt2)
         
         # 암호화된 상태에서 덧셈
-        ct_sum = ct1 + ct2
+        ct_sum = cc.EvalAdd(ct1, ct2)
         
         # 결과 복호화
-        result = cc.Decrypt(sk, ct_sum)
+        decrypted_sum = cc.Decrypt(keys.secretKey, ct_sum)
+        result = decrypted_sum.GetPackedValue()[0]
         
         print(f"  {value1} + {value2} = {result}")
         
@@ -55,6 +71,10 @@ def test_bgv():
                 print("  - SerializeToString 메서드 있음")
             if hasattr(ct1, 'Serialize'):
                 print("  - Serialize 메서드 있음")
+            if hasattr(ct1, 'save'):
+                print("  - save 메서드 있음")
+            if hasattr(ct1, 'SaveToFile'):
+                print("  - SaveToFile 메서드 있음")
         except Exception as e:
             print(f"  - 직렬화 테스트 중 에러: {str(e)}")
             

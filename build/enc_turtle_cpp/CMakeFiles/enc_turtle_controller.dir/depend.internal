@@ -14,6 +14,14 @@ CMakeFiles/enc_turtle_controller.dir/src/enc_turtle_controller.cpp.o
  /opt/ros/foxy/include/builtin_interfaces/msg/duration.hpp
  /opt/ros/foxy/include/builtin_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
  /opt/ros/foxy/include/builtin_interfaces/msg/time.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/detail/twist__builder.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/detail/twist__struct.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/detail/twist__traits.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/detail/twist__type_support.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/detail/vector3__struct.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/detail/vector3__traits.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/rosidl_generator_cpp__visibility_control.hpp
+ /opt/ros/foxy/include/geometry_msgs/msg/twist.hpp
  /opt/ros/foxy/include/libstatistics_collector/collector/collector.hpp
  /opt/ros/foxy/include/libstatistics_collector/collector/generate_statistics_message.hpp
  /opt/ros/foxy/include/libstatistics_collector/collector/metric_details_interface.hpp
@@ -297,6 +305,12 @@ CMakeFiles/enc_turtle_controller.dir/src/enc_turtle_controller.cpp.o
  /opt/ros/foxy/include/tracetools/tracetools.h
  /opt/ros/foxy/include/tracetools/utils.hpp
  /opt/ros/foxy/include/tracetools/visibility_control.hpp
+ /opt/ros/foxy/include/turtlesim/msg/detail/pose__builder.hpp
+ /opt/ros/foxy/include/turtlesim/msg/detail/pose__struct.hpp
+ /opt/ros/foxy/include/turtlesim/msg/detail/pose__traits.hpp
+ /opt/ros/foxy/include/turtlesim/msg/detail/pose__type_support.hpp
+ /opt/ros/foxy/include/turtlesim/msg/pose.hpp
+ /opt/ros/foxy/include/turtlesim/msg/rosidl_generator_cpp__visibility_control.hpp
  rosidl_generator_cpp/enc_turtle_cpp/msg/detail/encrypted_data__builder.hpp
  rosidl_generator_cpp/enc_turtle_cpp/msg/detail/encrypted_data__struct.hpp
  rosidl_generator_cpp/enc_turtle_cpp/msg/detail/encrypted_data__traits.hpp

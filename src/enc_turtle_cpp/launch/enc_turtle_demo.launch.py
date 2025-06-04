@@ -8,7 +8,8 @@ def generate_launch_description():
         Node(
             package='turtlesim',
             executable='turtlesim_node',
-            name='turtlesim'
+            name='turtlesim',
+            output='screen'
         ),
         
         # 두 번째 터틀 생성
@@ -18,22 +19,6 @@ def generate_launch_description():
             output='screen'
         ),
         
-        # Plant 노드 (기존 기능)
-        Node(
-            package='enc_turtle_cpp',
-            executable='turtle_plant',
-            name='turtle_plant',
-            output='screen'
-        ),
-        
-        # Controller 노드 (기존 기능)
-        Node(
-            package='enc_turtle_cpp',
-            executable='turtle_controller',
-            name='turtle_controller',
-            output='screen'
-        ),
-
         # 암호화된 Plant 노드 (새로운 기능)
         Node(
             package='enc_turtle_cpp',

@@ -2,6 +2,14 @@
 
 <rqt_graph >
 
+bgv 테스트 용
+
+```
+ cd ~/ROS2_turtlesim_ws && colcon build --packages-select enc_turtle_cpp && source install/setup.bash && ros2 run enc_turtle_cpp bgv_test
+
+```
+
+
 OpenFHE 파이썬은 동형암호 스킴이 지원이 안되는 것으로 보임 
 C++ 패키지로 완성
 
@@ -48,9 +56,13 @@ Y: 5544
 
 
 // N 사이즈가 2^13 일때 뎁스: 0
+
 ![image](https://github.com/user-attachments/assets/931f0fdd-07e8-4626-a2b3-fceb73d74fc5)
 
+
 // N 사이즈 2^12 일때 뎁스: 0 일때 65537 플레인 텍스트 크기에 대해서 이게 마지노선
+
+
 ![image](https://github.com/user-attachments/assets/780c3537-c846-4351-b90b-a6b4ba0f4394)
 
 // 

@@ -1,5 +1,5 @@
-# turtlebot_encrypted_control
-![image](https://github.com/user-attachments/assets/97b14244-0fa3-4a88-9693-7dee9a90a9bf)
+![image](https://github.com/user-attachments/assets/8a99bbea-0046-42ef-9190-dd14899aedfd)# turtlebot_encrypted_control
+
 
 OpenFHE 파이썬은 동형암호 스킴이 지원이 안되는 것으로 보임 
 C++ 패키지로 완성
@@ -13,8 +13,39 @@ C++ 패키지로 완성
 (현재 P = 65537 일때, N = 16384 (2^14) 정도이며 이때 데이터 크기는 1050103 약 1MB 사이즈)
 
 
+# open fhe scheme 속도
+```
+// N사이즈 : 2^14 16384 일때 
+
+sangwon@STEIECDSL-P04:~/ROS2_turtlesim_ws/install/enc_turtle_cpp/lib/enc_turtle_cpp$ ./bgv_test
+========== BGV 암호화 성능 테스트 시작 ==========
+컨텍스트 생성 시간: 11.551 ms
+키 생성 시간: 74.051 ms
+
+암호화 시간 (두 개의 값): 15.028 ms
+직렬화 시간 (두 개의 값): 3.508 ms
+직렬화된 데이터 크기: 1050103 bytes
+
+역직렬화 시간 (두 개의 값): 5.607 ms
+복호화 시간 (두 개의 값): 4.623 ms
+
+복호화된 결과:
+X: 5544
+Y: 5544
+
+========== 성능 요약 ==========
+컨텍스트 생성: 11.551 ms (10.1%)
+키 생성: 74.1 ms (64.7%)
+암호화: 15.0 ms (13.1%)
+직렬화: 3.5 ms (3.1%)
+역직렬화: 5.6 ms (4.9%)
+복호화: 4.6 ms (4.0%)
+총 시간: 114.4 ms (100%)
+==============================
 
 
+
+```
 # 질문거리
 
 1. 시나리오 설정을 어떻게 해야 좋을지

@@ -55,7 +55,7 @@ Y: 5544
 ```
 
 
-// N 사이즈가 2^13 일때 뎁스: 0
+// N 사이즈가 2^13 일때 뎁스: 1
 
 ![image](https://github.com/user-attachments/assets/931f0fdd-07e8-4626-a2b3-fceb73d74fc5)
 

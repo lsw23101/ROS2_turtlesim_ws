@@ -1,5 +1,6 @@
-![image](https://github.com/user-attachments/assets/8a99bbea-0046-42ef-9190-dd14899aedfd)# turtlebot_encrypted_control
+![image](https://github.com/user-attachments/assets/8ac3d6a4-9617-4b49-b13f-b977f1c6da56)
 
+<rqt_graph >
 
 OpenFHE 파이썬은 동형암호 스킴이 지원이 안되는 것으로 보임 
 C++ 패키지로 완성

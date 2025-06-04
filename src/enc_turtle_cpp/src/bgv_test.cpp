@@ -25,9 +25,9 @@ int main() {
     // 파라미터 설정
     CCParams<CryptoContextBGVRNS> parameters;
     parameters.SetPlaintextModulus(65537);
-    parameters.SetMultiplicativeDepth(2);
+    parameters.SetMultiplicativeDepth(0);  // 덧셈만 사용하므로 0으로 설정
     parameters.SetSecurityLevel(SecurityLevel::HEStd_128_classic);
-    parameters.SetRingDim(16384);
+    parameters.SetRingDim(4096);  // 2^13으로 줄임
 
     std::cout << "========== BGV 암호화 성능 테스트 시작 ==========\n";
     

@@ -31,9 +31,9 @@ public:
     // 암호화 설정
     CCParams<CryptoContextBGVRNS> parameters;
     parameters.SetPlaintextModulus(65537);
-    parameters.SetMultiplicativeDepth(2);
+    parameters.SetMultiplicativeDepth(1);
     parameters.SetSecurityLevel(SecurityLevel::HEStd_128_classic);
-    parameters.SetRingDim(16384);  // 2의 14승 암호문 크기 약 1MB
+    parameters.SetRingDim(8192);  
 
     cc = GenCryptoContext(parameters);
     cc->Enable(PKE);

@@ -376,7 +376,7 @@ ament_cmake_symlink_install_files("/home/sangwon/ROS2_turtlesim_ws/src/enc_turtl
 # install(DIRECTORY "launch" "DESTINATION" "share/enc_turtle_cpp")
 ament_cmake_symlink_install_directory("/home/sangwon/ROS2_turtlesim_ws/src/enc_turtle_cpp" DIRECTORY "launch" "DESTINATION" "share/enc_turtle_cpp")
 
-# install("TARGETS" "enc_turtle_plant" "enc_turtle_controller" "bgv_test" "DESTINATION" "lib/enc_turtle_cpp")
+# install("TARGETS" "enc_turtle_plant" "enc_turtle_controller" "bgv_test" "test_plant" "test_controller" "DESTINATION" "lib/enc_turtle_cpp")
 include("/home/sangwon/ROS2_turtlesim_ws/build/enc_turtle_cpp/ament_cmake_symlink_install_targets_6_${CMAKE_INSTALL_CONFIG_NAME}.cmake")
 
 # install(FILES "/home/sangwon/ROS2_turtlesim_ws/build/enc_turtle_cpp/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/enc_turtle_cpp" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

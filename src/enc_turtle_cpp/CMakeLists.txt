@@ -153,6 +153,46 @@ target_link_libraries(bgv_test
 )
 target_compile_options(bgv_test PRIVATE -fopenmp ${OPENFHE_COMPILE_OPTIONS})
 
+# Test Plant node
+add_executable(test_plant src/test_plant.cpp)
+target_include_directories(test_plant PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${OPENFHE_INCLUDE_DIRS}
+)
+target_link_libraries(test_plant
+  ${OPENFHE_LINK_LIBRARIES}
+)
+target_compile_options(test_plant PRIVATE ${OPENFHE_COMPILE_OPTIONS})
+rosidl_target_interfaces(test_plant
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+ament_target_dependencies(
+  test_plant
+  "rclcpp"
+  "geometry_msgs"
+  "turtlesim"
+)
+
+# Test Controller node
+add_executable(test_controller src/test_controller.cpp)
+target_include_directories(test_controller PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${OPENFHE_INCLUDE_DIRS}
+)
+target_link_libraries(test_controller
+  ${OPENFHE_LINK_LIBRARIES}
+)
+target_compile_options(test_controller PRIVATE ${OPENFHE_COMPILE_OPTIONS})
+rosidl_target_interfaces(test_controller
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+ament_target_dependencies(
+  test_controller
+  "rclcpp"
+  "geometry_msgs"
+  "turtlesim"
+)
+
 # Install launch files
 install(DIRECTORY
   launch
@@ -164,6 +204,8 @@ install(TARGETS
   enc_turtle_plant
   enc_turtle_controller
   bgv_test
+  test_plant
+  test_controller
   DESTINATION lib/${PROJECT_NAME}
 )
 

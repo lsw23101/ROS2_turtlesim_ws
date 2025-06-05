@@ -33,7 +33,7 @@ public:
     parameters.SetPlaintextModulus(65537);
     parameters.SetMultiplicativeDepth(1);
     parameters.SetSecurityLevel(SecurityLevel::HEStd_128_classic);
-    parameters.SetRingDim(8192);  
+    parameters.SetRingDim(8192);
 
     cc = GenCryptoContext(parameters);
     cc->Enable(PKE);
@@ -44,7 +44,6 @@ public:
     kp = cc->KeyGen();
 
     if (kp.secretKey) {
-        cc->EvalMultKeyGen(kp.secretKey);
         cc->EvalSumKeyGen(kp.secretKey);
     } else {
         RCLCPP_ERROR(this->get_logger(), "Key generation failed!");

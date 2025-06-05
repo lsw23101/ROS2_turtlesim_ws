@@ -29,9 +29,9 @@ public:
     // 암호화 설정
     CCParams<CryptoContextBGVRNS> parameters;
     parameters.SetPlaintextModulus(65537);
-    parameters.SetMultiplicativeDepth(2);
+    parameters.SetMultiplicativeDepth(1);  // 곱셈이 필요 없으므로 1로 설정
     parameters.SetSecurityLevel(SecurityLevel::HEStd_128_classic);
-    parameters.SetRingDim(16384);
+    parameters.SetRingDim(8192);  // 덧셈만 하므로 더 작은 값으로 설정
 
     cc = GenCryptoContext(parameters);
     cc->Enable(PKE);
@@ -42,8 +42,7 @@ public:
     kp = cc->KeyGen();
 
     if (kp.secretKey) {
-        cc->EvalMultKeyGen(kp.secretKey);
-        cc->EvalSumKeyGen(kp.secretKey);
+        cc->EvalSumKeyGen(kp.secretKey);  // 덧셈 키만 생성
     } else {
         RCLCPP_ERROR(this->get_logger(), "Key generation failed!");
     }

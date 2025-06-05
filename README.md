@@ -22,6 +22,11 @@ C++ 패키지로 완성
 (현재 P = 65537 일때, N = 16384 (2^14) 정도이며 이때 데이터 크기는 1050103 약 1MB 사이즈)
 
 
+(암호 보안 레벨 비설정 가능)
+```
+parameters.SetSecurityLevel(SecurityLevel::HEStd_NotSet); // 자동 결정 방지
+```
+
 # open fhe scheme 속도
 ```
 // N사이즈 : 2^14 16384 일때 뎁스: 2

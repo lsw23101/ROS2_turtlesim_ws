@@ -23,6 +23,7 @@ C++ 패키지로 완성
 
 
 (암호 보안 레벨 비설정 가능)
+openfhecore/include/lattice/params.h
 ```
 parameters.SetSecurityLevel(SecurityLevel::HEStd_NotSet); // 자동 결정 방지
 ```

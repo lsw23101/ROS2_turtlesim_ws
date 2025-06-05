@@ -43,6 +43,18 @@ public:
     if (kp.secretKey) {
         // 곱셈 키 생성
         cc->EvalMultKeyGen(kp.secretKey);
+        
+        // 키 생성 대기
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        
+        // 키가 생성되었는지 확인
+        try {
+            auto evalMultKey = cc->GetEvalMultKeyVector("");
+            RCLCPP_INFO(this->get_logger(), "EvalMultKey generated successfully");
+        } catch (const std::exception& e) {
+            RCLCPP_ERROR(this->get_logger(), "Failed to generate EvalMultKey: %s", e.what());
+            return;
+        }
 
         // QoS 설정
         rclcpp::QoS qos(10);
@@ -69,9 +81,8 @@ public:
         std::string pubkey_str = ss_pubkey.str();
         std::vector<uint8_t> pubkey_data(pubkey_str.begin(), pubkey_str.end());
 
-        // EvalMultKey 가져오기
-        const std::string keyTag = ""; // 기본 keyTag 사용
-        auto evalMultKey = cc->GetEvalMultKeyVector(keyTag);
+        // EvalMultKey 가져오기 (이미 존재 확인됨)
+        auto evalMultKey = cc->GetEvalMultKeyVector("");
         
         std::stringstream ss_evalkey;
         Serial::Serialize(evalMultKey, ss_evalkey, SerType::BINARY);
